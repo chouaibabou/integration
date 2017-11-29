@@ -20,10 +20,6 @@ ps: docker-compose.yml
 install:        ## launch project
 install: stop start ps
 
-dkUbuntu:           ## Launch container os
-dkUbuntu:
-	docker exec -ti dkUbuntu bash
-
 jenkins:          ## Launch container jenkins
 jenkins:
 	docker exec -ti jenkins_1 bash
@@ -34,7 +30,7 @@ sonar:
 
 sql_sonar:          ## Launch container mysql sonar
 sql_sonar:
-	docker exec -ti sql_sonar_ bash
+	docker exec -ti sql_sonar_1 bash
 
 cc:             ## Clear the cache in dev env
 cc:
