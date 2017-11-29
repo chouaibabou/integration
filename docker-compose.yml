@@ -1,0 +1,70 @@
+version: '2'
+
+networks:
+  jenkins_sonar:
+
+services:
+  jenkins:
+    build:
+      context: ./jenkins
+      dockerfile: "Dockerfile"
+    hostname: "jenkins_1"
+    container_name: "jenkins_1"
+    restart: "unless-stopped"
+    ports:
+        - "50001:50000"
+        - "8081:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - /opt/jenkins/:/var/lib/jenkins/.
+    stdin_open: true
+    tty: true
+    links:
+      - sonar
+      - mysql
+    networks:
+      - jenkins_sonar
+    environment:
+      - SONAR_PORT=9002
+      - MYSQL_PORT=3306
+
+  sonar:
+#    image: webdizz/sonarqube:6.2
+    build:
+      context: ./sonarqube
+      dockerfile: "Dockerfile"
+    hostname: sonar
+    container_name: "sonar_1"
+    restart: "unless-stopped"
+    ports:
+      - 9002:9000
+    links:
+      - mysql
+    expose:
+      - 9002
+    networks:
+      - jenkins_sonar
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - /opt/sonarqube/:/var/lib/sonar/.
+    environment:
+      - SONAR_JDBC_URL=jdbc:mysql://mysql:3306/sonarqube?useUnicodse=true&characterEncoding=utf8&rewriteBatchedStatements=true
+      - SONAR_DB_USERNAME=sonarqube
+      - SONAR_DB_PASSWORD=sonarqube
+
+  mysql:
+    image: mysql:5.6
+    hostname: mysql
+    container_name: "sql_sonar_1"
+    restart: "unless-stopped"
+    expose:
+      - 3306
+    networks:
+      - jenkins_sonar
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysecretpassword
+      - MYSQL_USER=sonarqube
+      - MYSQL_PASSWORD=sonarqube
+      - MYSQL_DATABASE=sonarqube

@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson.tasks.Mailer_-DescriptorImpl plugin="mailer@1.20">
+  <hudsonUrl>http://localhost:8081/</hudsonUrl>
+  <smtpAuthUsername>jekins.viseo@gmail.com</smtpAuthUsername>
+  <smtpAuthPassword>{AQAAABAAAAAQiHwOAdRSYQe6YWhUFFbAbacQ14C4MJXfTos0JdSSZxs=}</smtpAuthPassword>
+  <replyToAddress>build.jenkins@viseo.com</replyToAddress>
+  <smtpHost>smtp.gmail.com</smtpHost>
+  <useSsl>true</useSsl>
+  <smtpPort>465</smtpPort>
+  <charset>UTF-8</charset>
+</hudson.tasks.Mailer_-DescriptorImpl>
