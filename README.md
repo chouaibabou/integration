@@ -76,8 +76,8 @@ eval "$(docker-machine env default)"
 Clone Repository
 
 ```
-git clone git@github.com:marcelbirkner/docker-ci-tool-stack.git
-cd docker-ci-tool-stack
+git clone https://github.com/chouaibabou/integration.git intégration continue
+cd integration_continue
 ```
 
 ### Step 4 -  Start the program

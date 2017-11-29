@@ -22,7 +22,8 @@ COPY jenk/plugins.txt /var/jenkins_home/plugins.txt
 RUN /usr/local/bin/plugins.sh /var/jenkins_home/plugins.txt
 
 # Adding default Jenkins Jobs
-COPY jobs/crud.xml /usr/share/jenkins/ref/jobs/crud/config.xml
+#COPY jobs/crud.xml /usr/share/jenkins/ref/jobs/crud/config.xml
+#COPY /var/lib/jenkins/jobs/*  /usr/share/jenkins/ref/jobs/
 #
 #############################################
 ## Configure Jenkins
@@ -30,7 +31,7 @@ COPY jobs/crud.xml /usr/share/jenkins/ref/jobs/crud/config.xml
 
 ## Jenkins User, Config, ...
 COPY jenk/config/ /usr/share/jenkins/ref/
-COPY jenk/users/chouaibabou /usr/share/jenkins/ref/users/chouaibabou
+COPY jenk/users/ /usr/share/jenkins/ref/users/
 
 # tell Jenkins that no banner prompt for pipeline plugins is needed
 RUN echo 2.0 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
